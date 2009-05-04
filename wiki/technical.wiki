@@ -1,0 +1,11 @@
+#summary Bàn bạc về kỹ thuật thực hiện
+
+= Kỹ thuật =
+
+Tôi trình bày về kỹ thuật thực hiện chương trình ở đây.
+
+
+= Chi tiết =
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
