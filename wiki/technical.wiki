@@ -1,4 +1,5 @@
 #summary Bàn bạc về kỹ thuật thực hiện
+#labels Featured
 
 = Kỹ thuật =
 
