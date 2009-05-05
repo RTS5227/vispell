@@ -1,5 +1,5 @@
 #summary Bàn bạc về kỹ thuật thực hiện
-#labels Featured
+#labels Featured,Phase-Implementation
 
 = Giới thiệu =
 
@@ -13,3 +13,14 @@ Chương trình có thể đọc các file này dễ dàng bằng cách dùng st
 
 == Sử dụng Regular Expression ==
 vispell sử dụng regex để: tìm kiếm các từ sai dạng viết hoa liên tiếp (VD: CHi tiền, CHương trìNH), thay thế trong chuỗi không phân biệt hoa thường (vì nếu dùng string.Replace() sẽ gặp vấn đề không thay thế chuỗi có cả chữ hoa và chữ thường được)
+
+== Sử dụng web browser để trình bày kết quả ==
+vispell sử dụng WebBrowser (wrap một cái IE browser) để hiển thị kết quả tìm kiếm cho dễ dàng. Việc này giúp tạo thuận lợi để tôi có thể đánh dấu các lỗi sai trong chuỗi kết quả dễ dàng, trình bày giao diện phong phú, có thể thay đổi kiểu dáng (màu sắc những từ bị sai, từ nghi vấn, đưa từ sai vào từ điển bằng cách gọi javascript)
+Tôi sử dụng cả jquery và blueprint CSS framework trong file html dùng để hiển thị kết quả.
+
+Các kỹ thuật xử lý với webBrowser control cần thiết có thể xem ở đây:
+    * http://msdn.microsoft.com/en-us/library/a0746166(VS.85).aspx#Mtps_DropDownFilterText
+    * http://msdn.microsoft.com/en-us/library/system.windows.forms.htmldocument(VS.85).aspx
+    * http://msdn.microsoft.com/en-us/library/system.windows.forms.htmldocument.attacheventhandler(VS.85).aspx
+    * http://msdn.microsoft.com/en-us/library/system.windows.forms.htmldocument.invokescript(VS.85).aspx
+
