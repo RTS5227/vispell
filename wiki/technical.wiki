@@ -1,12 +1,15 @@
 #summary Bàn bạc về kỹ thuật thực hiện
 #labels Featured
 
+= Giới thiệu =
+
+Tôi trình bày về kỹ thuật thực hiện chương trình ở đây. Nếu đọc code chương trình này, các bạn mới học C# có thể nắm được một số kỹ thuật như: đọc file đi kèm chương trình, xử lý string, regular expression đơn giản với C#, nhúng Browser lên winform để làm việc hiển thị ... Các kỹ thuật này là các đầu mục lớn ở phía dưới, các bạn có thể theo dõi dễ dàng.
+
+
 = Kỹ thuật =
+== Sử dụng file text cấu trúc đơn giản ==
+Sử dụng các file text có cấu trúc đơn giản để lưu trữ dữ liệu từ điển. Các mục từ trong file phân cách bởi dấu enter.
+Chương trình có thể đọc các file này dễ dàng bằng cách dùng string.ReadAllText();
 
-Tôi trình bày về kỹ thuật thực hiện chương trình ở đây.
-
-
-= Chi tiết =
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== Sử dụng Regular Expression ==
+vispell sử dụng regex để: tìm kiếm các từ sai dạng viết hoa liên tiếp (VD: CHi tiền, CHương trìNH), thay thế trong chuỗi không phân biệt hoa thường (vì nếu dùng string.Replace() sẽ gặp vấn đề không thay thế chuỗi có cả chữ hoa và chữ thường được)
