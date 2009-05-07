@@ -11,6 +11,9 @@ Tôi trình bày về kỹ thuật thực hiện chương trình ở đây. Nế
 Sử dụng các file text có cấu trúc đơn giản để lưu trữ dữ liệu từ điển. Các mục từ trong file phân cách bởi dấu enter.
 Chương trình có thể đọc các file này dễ dàng bằng cách dùng string.ReadAllText();
 
+Tôi cũng đang xem xét và kiểm thử hiệu năng để sử dụng từ điển những cụm từ có nghĩa trong từ điển của Hồ Ngọc Đức (xem thread này http://groups.google.com/group/phpvietnam/browse_thread/thread/e635382f1bdca7b2?hl=vi )
+
+
 == Sử dụng Regular Expression ==
 vispell sử dụng regex để: tìm kiếm các từ sai dạng viết hoa liên tiếp (VD: CHi tiền, CHương trìNH), thay thế trong chuỗi không phân biệt hoa thường (vì nếu dùng string.Replace() sẽ gặp vấn đề không thay thế chuỗi có cả chữ hoa và chữ thường được)
 
