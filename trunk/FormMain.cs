@@ -82,7 +82,7 @@ namespace ViSpell
             }
             try
             {
-                sDoubtWordDic = File.ReadAllText("blue.doubt.dic", Encoding.UTF8);
+                sDoubtWordDic = File.ReadAllText("grey.doubt.dic", Encoding.UTF8);
                 arrDoubting.AddRange(sDoubtWordDic.Split(new string[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries));
                 pln("Init doubting Dic OK");
             }
