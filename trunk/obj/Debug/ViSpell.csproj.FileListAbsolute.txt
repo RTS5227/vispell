@@ -16,7 +16,6 @@ D:\LockeVN\eclipseworkspace\vispell\bin\html\asset\jtpl.js
 D:\LockeVN\eclipseworkspace\vispell\bin\html\asset\print.css
 D:\LockeVN\eclipseworkspace\vispell\bin\html\asset\screen.css
 D:\LockeVN\eclipseworkspace\vispell\bin\html\asset\style.css
-D:\LockeVN\eclipseworkspace\vispell\bin\blue.doubt.dic
 D:\LockeVN\eclipseworkspace\vispell\bin\ignoremark.dic
 D:\LockeVN\eclipseworkspace\vispell\bin\ok.double.dic
 D:\LockeVN\eclipseworkspace\vispell\bin\wrong.double.dic
@@ -33,3 +32,4 @@ D:\LockeVN\eclipseworkspace\vispell\bin\ViSpell.exe
 D:\LockeVN\eclipseworkspace\vispell\bin\ViSpell.pdb
 D:\LockeVN\eclipseworkspace\vispell\obj\Debug\ViSpell.exe
 D:\LockeVN\eclipseworkspace\vispell\obj\Debug\ViSpell.pdb
+D:\LockeVN\eclipseworkspace\vispell\bin\grey.doubt.dic

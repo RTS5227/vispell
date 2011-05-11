@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.splitContainer = new System.Windows.Forms.SplitContainer();
+            this.browserSource = new System.Windows.Forms.WebBrowser();
             this.browserResult = new System.Windows.Forms.WebBrowser();
             this.btnCheck = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -38,7 +39,6 @@
             this.radDouble = new System.Windows.Forms.RadioButton();
             this.radTriple = new System.Windows.Forms.RadioButton();
             this.btnReloadApp = new System.Windows.Forms.Button();
-            this.browserSource = new System.Windows.Forms.WebBrowser();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
@@ -46,9 +46,9 @@
             // 
             // splitContainer
             // 
-            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer.Location = new System.Drawing.Point(4, 24);
             this.splitContainer.Name = "splitContainer";
             // 
@@ -62,6 +62,19 @@
             this.splitContainer.Size = new System.Drawing.Size(789, 402);
             this.splitContainer.SplitterDistance = 322;
             this.splitContainer.TabIndex = 2;
+            // 
+            // browserSource
+            // 
+            this.browserSource.AllowWebBrowserDrop = false;
+            this.browserSource.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.browserSource.IsWebBrowserContextMenuEnabled = false;
+            this.browserSource.Location = new System.Drawing.Point(0, 0);
+            this.browserSource.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browserSource.Name = "browserSource";
+            this.browserSource.ScrollBarsEnabled = false;
+            this.browserSource.Size = new System.Drawing.Size(322, 402);
+            this.browserSource.TabIndex = 0;
+            this.browserSource.Url = new System.Uri("", System.UriKind.Relative);
             // 
             // browserResult
             // 
@@ -92,7 +105,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(1, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 13);
+            this.label1.Size = new System.Drawing.Size(153, 15);
             this.label1.TabIndex = 4;
             this.label1.Text = "Đưa text gốc vào ô bên này";
             // 
@@ -101,14 +114,14 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(302, 5);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 13);
+            this.label2.Size = new System.Drawing.Size(173, 15);
             this.label2.TabIndex = 5;
             this.label2.Text = "Text sau khi check ở ô bên này";
             // 
             // txtConsole
             // 
-            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtConsole.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtConsole.Location = new System.Drawing.Point(4, 432);
             this.txtConsole.Multiline = true;
@@ -121,9 +134,9 @@
             this.radSingle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radSingle.AutoSize = true;
             this.radSingle.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radSingle.Location = new System.Drawing.Point(456, 522);
+            this.radSingle.Location = new System.Drawing.Point(446, 520);
             this.radSingle.Name = "radSingle";
-            this.radSingle.Size = new System.Drawing.Size(79, 17);
+            this.radSingle.Size = new System.Drawing.Size(89, 19);
             this.radSingle.TabIndex = 7;
             this.radSingle.Text = "SingleWord";
             this.radSingle.UseVisualStyleBackColor = true;
@@ -133,9 +146,9 @@
             this.radDouble.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.radDouble.AutoSize = true;
             this.radDouble.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radDouble.Location = new System.Drawing.Point(546, 521);
+            this.radDouble.Location = new System.Drawing.Point(536, 519);
             this.radDouble.Name = "radDouble";
-            this.radDouble.Size = new System.Drawing.Size(84, 17);
+            this.radDouble.Size = new System.Drawing.Size(94, 19);
             this.radDouble.TabIndex = 8;
             this.radDouble.Text = "DoubleWord";
             this.radDouble.UseVisualStyleBackColor = true;
@@ -146,9 +159,9 @@
             this.radTriple.AutoSize = true;
             this.radTriple.Checked = true;
             this.radTriple.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.radTriple.Location = new System.Drawing.Point(636, 522);
+            this.radTriple.Location = new System.Drawing.Point(627, 520);
             this.radTriple.Name = "radTriple";
-            this.radTriple.Size = new System.Drawing.Size(76, 17);
+            this.radTriple.Size = new System.Drawing.Size(85, 19);
             this.radTriple.TabIndex = 9;
             this.radTriple.TabStop = true;
             this.radTriple.Text = "TripleWord";
@@ -160,24 +173,11 @@
             this.btnReloadApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnReloadApp.Location = new System.Drawing.Point(162, 519);
             this.btnReloadApp.Name = "btnReloadApp";
-            this.btnReloadApp.Size = new System.Drawing.Size(98, 23);
+            this.btnReloadApp.Size = new System.Drawing.Size(164, 23);
             this.btnReloadApp.TabIndex = 10;
             this.btnReloadApp.Text = "Nạp lại cấu hình";
             this.btnReloadApp.UseVisualStyleBackColor = true;
             this.btnReloadApp.Click += new System.EventHandler(this.btnReloadApp_Click);
-            // 
-            // browserSource
-            // 
-            this.browserSource.AllowWebBrowserDrop = false;
-            this.browserSource.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browserSource.IsWebBrowserContextMenuEnabled = false;
-            this.browserSource.Location = new System.Drawing.Point(0, 0);
-            this.browserSource.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browserSource.Name = "browserSource";
-            this.browserSource.ScrollBarsEnabled = false;
-            this.browserSource.Size = new System.Drawing.Size(322, 402);
-            this.browserSource.TabIndex = 0;
-            this.browserSource.Url = new System.Uri("", System.UriKind.Relative);
             // 
             // FormMain
             // 
