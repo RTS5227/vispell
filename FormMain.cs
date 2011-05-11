@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-// using System.Linq;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
@@ -11,38 +11,54 @@ using System.IO;
 
 namespace ViSpell
 {
+    /// <summary>
+    /// Main UI of the program
+    /// </summary>
     public partial class FormMain : Form
     {
-        protected string sSingleWordDic = string.Empty;
-        protected string sDoubleWordDic = string.Empty;
-        protected string sTripleWordDic = string.Empty;
-        
-        protected string sDoubtWordDic = string.Empty;
-        
-        protected string sIgnoreMarkDic = string.Empty;
-        
-        List<string> arrToTrim = new List<string>();
-        List<string> arrDoubting = new List<string>();
-
         public FormMain()
         {
             InitApp();
         }
-
-        private void InitApp()
+        
+        private void btnReloadApp_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
+            InitApp();
+        }
 
-            string sDoubleWordOKDic = File.ReadAllText("ok.double.dic", Encoding.UTF8);
-            
-            InitDictionary();
-            InitWorkingParameter();
+        /// <summary>
+        /// Do check spelling
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCheck_Click(object sender, EventArgs e)
+        {
+            string sourceText = browserSource.Document.GetElementById("sourcetext").InnerHtml;
 
+            var ret = SpellCheckerEngine.Instance.Run(sourceText);
+            if (ret != null)
+            {
+                browserResult.Document.GetElementById("result").InnerHtml = ret.OutputTextWithMark;
+                pln(ret.OutputTextWithMark);
+            }
+            else 
+            {
+                pln("Không phân tích được");
+            }           
+        }
+
+
+
+        /// <summary>
+        /// Use interop browser to render result as HTML
+        /// </summary>
+        private void InitBrowserResultDisplay()
+        {
             // init browser result display
-            string sURL = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"/html/source.htm";
+            string sURL = Application.StartupPath + @"/html/source.htm";
             browserSource.Navigate(sURL);
-            sURL = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + @"/html/result.htm";
-            browserResult.Navigate(sURL);            
+            sURL = Application.StartupPath + @"/html/result.htm";
+            browserResult.Navigate(sURL);
         }
 
         private void InitWorkingParameter()
@@ -51,8 +67,16 @@ namespace ViSpell
             pln("Init Working param OK");
         }
 
-        private void InitDictionary()
+        public SpellCheckerEngineWorkingDictionary InitDictionary()
         {
+            string sSingleWordDic = string.Empty;
+            string sDoubleWordDic = string.Empty;
+            string sTripleWordDic = string.Empty;
+            string sDoubtWordDic = string.Empty;
+            string sIgnoreMarkDic = string.Empty;
+            List<string> arrToTrim = new List<string>();
+            List<string> arrDoubting = new List<string>();
+
             try
             {
                 sSingleWordDic = File.ReadAllText("ok.single.dic", Encoding.UTF8);
@@ -100,130 +124,36 @@ namespace ViSpell
             {
                 pln("Init sIgnoreMarkDic Failed");
             }
+
+            return new SpellCheckerEngineWorkingDictionary { 
+                SingleWordDic = sSingleWordDic, 
+                DoubleWordDic = sDoubleWordDic, 
+                TripleWordDic = sTripleWordDic,
+                DoubtWorkDic = sDoubtWordDic,
+                IgnoreMarkDic = sIgnoreMarkDic
+            };
         }
-
-        private void btnCheck_Click(object sender, EventArgs e)
-        {
-            string sResult = browserSource.Document.GetElementById("sourcetext").InnerHtml;
-
-            string[] arrSingleWord = sResult.Split(new string[] { " " }, StringSplitOptions.RemoveEmptyEntries);
-            
-            string sSingleWord = string.Empty;
-            string sDoubleWord = string.Empty;
-            string sTripleWord = string.Empty;
-
-            List<string> arrSingleWordFail = new List<string>();
-            List<string> arrDoubleWordFail = new List<string>();
-            List<string> arrTripleWordFail = new List<string>();
-            
-            for (int i = 0; i < arrSingleWord.Length; i++)
-            {
-                sSingleWord = NormalizeWord(arrSingleWord[i]);
-                if (!arrSingleWordFail.Contains(sSingleWord))
-                {
-                    if(!sSingleWordDic.Contains(sSingleWord))
-                    {
-                        arrSingleWordFail.Add(sSingleWord);
-                    }
-                        // TODO: support more uppercase unicode letter of VNese
-                    else if (Regex.IsMatch(arrSingleWord[i], "[A-Z]{2}"))
-                    {
-                        arrSingleWordFail.Add(arrSingleWord[i]);
-                    }
-                }
-
-                if (i < arrSingleWord.Length - 1)
-                {
-                    sDoubleWord = sSingleWord + " " + NormalizeWord(arrSingleWord[i + 1]);
-                    if (sDoubleWordDic.Contains(sDoubleWord) && !arrDoubleWordFail.Contains(sDoubleWord))
-                    {
-                        arrDoubleWordFail.Add(sDoubleWord);
-                    }
-                }
-                else
-                {
-                    sDoubleWord = string.Empty; 
-                }
-
-                if (i < arrSingleWord.Length - 2)
-                {
-                    sTripleWord = sDoubleWord + " " + NormalizeWord(arrSingleWord[i + 2]);
-                    if (sTripleWordDic.Contains(sTripleWord) && !arrTripleWordFail.Contains(sTripleWord))
-                    {
-                        arrTripleWordFail.Add(sTripleWord);
-                    }
-                }
-                else
-                {
-                    sTripleWord = string.Empty;
-                }
-            }
-
-            foreach (string s in arrTripleWordFail)
-            {
-                sResult = Regex.Replace(sResult, Regex.Escape(s), Regex.Escape(MakeHTMLStrong(s)), RegexOptions.IgnoreCase);
-                // sResult = sResult.Replace(s, MakeHTMLStrong(s));
-            }
-            foreach (string s in arrDoubleWordFail)
-            {
-                sResult = Regex.Replace(sResult, Regex.Escape(s), Regex.Escape(MakeHTMLStrong(s)), RegexOptions.IgnoreCase);
-                //sResult = sResult.Replace(s, MakeHTMLStrong(s));
-            }
-            foreach (string s in arrSingleWordFail)
-            {
-                sResult = Regex.Replace(sResult, Regex.Escape(s), Regex.Escape(MakeHTMLStrong(s)), RegexOptions.IgnoreCase);
-                //sResult = sResult.Replace(s, MakeHTMLStrong(s));
-            }
-            foreach (string s in arrDoubting)
-            {
-                sResult = Regex.Replace(sResult, Regex.Escape(s), Regex.Escape(MakeHTMLColor(s, Color.BlueViolet)), RegexOptions.IgnoreCase);                
-                //sResult = sResult.Replace(s, MakeHTMLColor(s, Color.BlueViolet));
-            }            
-
-            browserResult.Document.GetElementById("result").InnerHtml = sResult;
-            pln(sResult);
-        }
-
 
         private void p(string s)
         {
-            txtConsole.Text = s + txtConsole.Text;
+            txtConsole.Text = DateTime.Now.ToString("yyyy MM dd hh:mm:ss") + ": " + s + txtConsole.Text;
         }
         private void pln(string s)
         {
             p(s + Environment.NewLine);
         }
 
-
-        
-
-        private string NormalizeWord(string s)
+        private void InitApp()
         {
-            // remove tag
-            s = Lib.HtmlRemoval.StripTagsCharArray(s.ToLower());
-            
-            // remove mark, space, ... in ignoremark
-            foreach (string sMark in arrToTrim)
-            {
-                s = s.Replace(sMark, "");
-            }
-            return s;
-        }
+            InitializeComponent();
 
-        private string MakeHTMLStrong(string s)
-        {
-            return "<strong>" + s + "</strong>";
-        }
-        private string MakeHTMLColor(string s, Color c)
-        {
-            return "<span style='color:" +c.Name+ ";'>" + s + "</span>";
-        }
+            string sDoubleWordOKDic = File.ReadAllText("ok.double.dic", Encoding.UTF8);
 
-        private void btnReloadApp_Click(object sender, EventArgs e)
-        {
-            InitApp();
-        }
+            var dic = InitDictionary();
+            InitWorkingParameter();
+            SpellCheckerEngine.Instance.DictionaryToWork = dic;
 
-        
+            InitBrowserResultDisplay();
+        }
     }
 }
