@@ -134,6 +134,11 @@ namespace ViSpell
             };
         }
 
+        /// <summary>
+        /// to lower, strip html tag, remove mark (in ArrayToTrim dic) from string s
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         private string NormalizeWord(string s)
         {
             // remove tag
@@ -150,11 +155,21 @@ namespace ViSpell
 
         private string WrapColorWord(string s, Color c)
         {
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
             return "<span style='color:" + c.Name + ";'>" + s + "</span>";
         }
 
         private string WrapStrongWord(string s)
         {
+            if (string.IsNullOrEmpty(s))
+            {
+                return s;
+            }
+
             return "<strong>" + s + "</strong>";
         }
 
