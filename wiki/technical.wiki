@@ -12,7 +12,9 @@ Sử dụng các file text có cấu trúc đơn giản để lưu trữ dữ li
 Chương trình có thể đọc các file này dễ dàng bằng cách dùng string.ReadAllText();
 
 Tôi cũng đang xem xét và kiểm thử hiệu năng để sử dụng từ điển những cụm từ có nghĩa trong từ điển của Hồ Ngọc Đức (xem thread này http://groups.google.com/group/phpvietnam/browse_thread/thread/e635382f1bdca7b2?hl=vi )
+
 (Dự định) sử dụng thêm dữ liệu từ đây http://www.xulyngonngu.com/sharing/
+
 (Dự định) Cho phép cộng đồng cập nhật các từ blacklist, greylist
 
 
